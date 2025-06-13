@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #f9f8f4; border-bottom: 1px solid #ddd; padding: 1rem 0;">
+  <div class="container-fluid">
+
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold" href="/" style="color: #5e412f; font-size: 1.5rem;">
+      LibreBooks
+    </a>
+
+    <!-- Hamburger toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <!-- Center Nav Links -->
+      <ul class="navbar-nav mx-auto gap-4 text-center">
+        <li class="nav-item">
+          <a class="nav-link nav-link-custom fw-semibold" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-custom fw-semibold" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-custom fw-semibold" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-custom fw-semibold" href="/library">Library</a>
+        </li>
+      </ul>
+
+      <!-- Search + Login -->
+      <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center gap-2 mt-3 mt-lg-0">
+        <form class="d-flex" role="search">
+          <input class="form-control form-control-md me-2 rounded-pill" type="search" placeholder="Search books" aria-label="Search">
+          <button class="btn btn-md text-white rounded-pill" style="background-color: #6b4f3b;" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+
+        <a href="/accounts/login/" class="btn btn-md text-white rounded-pill" style="background-color: #6b4f3b;">
+          Login
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>

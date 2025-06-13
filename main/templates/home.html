@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load custom_filters %}
+
+<section class="hero-section text-white d-flex align-items-center">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold">Read. Discover. Grow with LibreBooks.</h1>
+    <p class="lead mt-3">Find your next favorite book in our curated digital library.</p>
+    <a href="/library" class="btn btn-outline-light mt-4 px-4 py-2 rounded-pill">Browse Library</a>
+  </div>
+</section>
+
+<section class="py-5  featured-section">
+  <div class="container text-center">
+    <h2 class="mb-4"> Featured Books</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+
+    {% for book in featured_books %}
+      <div class="col-md-3 mb-4">
+        <div class="card h-100 shadow-sm featured-card">
+          <img src="{{book.cover_image.url}}" class="card-img-top" alt="{{book.title}}">
+          <div class="card-body">
+            <h5 class="card-title">{{book.title}}
+                 <i class="bi bi-heart wishlist-icon" role="button" title="Add to Wishlist"></i>
+            </h5>
+            <p class="card-text">{{book.author}}</p>
+            <p class="card-text">{{book.description|truncatewords:12}}</p>
+             <div class="d-flex justify-content-between">
+              <a href="{{ book.pdf_file.url }}" target="_blank" class="btn btn-md rounded-pill">Read PDF</a>
+              <a href="" class="btn rounded-pill btn-md">View Details</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+    </div>
+  </div>
+</section>
+
+<!-- Browse by Category -->
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="mb-4">Browse by Category</h2>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      {% for category in categories %}
+        <a href="#" class="category-badge">{{ category.name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- Why Choose LibreBooks -->
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="mb-5 fw-bold">Why Choose LibreBooks?</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100 rounded-pill shadow-sm">
+          <div class="mb-3 fs-2 text-primary"><i class="bi bi-lightning-charge-fill"></i></div>
+          <h5 class="fw-semibold">Fast Access</h5>
+          <p class="text-muted">Instantly find and read books without delays.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100 rounded-pill shadow-sm">
+          <div class="mb-3 fs-2 text-danger"><i class="bi bi-heart-fill"></i></div>
+          <h5 class="fw-semibold">Wishlist</h5>
+          <p class="text-muted">Save your favorite books to read later.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100 rounded-pill shadow-sm">
+          <div class="mb-3 fs-2 text-success"><i class="bi bi-download"></i></div>
+          <h5 class="fw-semibold">Free Downloads</h5>
+          <p class="text-muted">Access PDFs directly without any cost.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card p-4 h-100 rounded-pill shadow-sm">
+          <div class="mb-3 fs-2 text-warning"><i class="bi bi-star-fill"></i></div>
+          <h5 class="fw-semibold">Curated Picks</h5>
+          <p class="text-muted">High-quality books handpicked for all readers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="py-5 testimonial-section mt-5">
+  <div class="container text-center">
+    <h2 class="text-center mb-5">What Our Readers Say</h2>
+
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <!-- Indicators -->
+      <div class="carousel-indicators">
+        {% for group in testimonials|slice:"::"|make_groups_of:3 %}
+          <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></button>
+        {% endfor %}
+      </div>
+
+      <!-- Carousel Inner -->
+      <div class="carousel-inner">
+        {% for group in testimonials|make_groups_of:3 %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <div class="row justify-content-center">
+            {% for testimonial in group %}
+            <div class="col-md-4 mb-4">
+              <div class="card h-100 shadow-sm p-3 rounded-5 text-center testimonial-card">
+                <img src="{{ testimonial.photo.url }}" alt="{{ testimonial.name }}" class="rounded-circle mb-3 text-center" width="80" height="80" style="object-fit: cover;">
+                <p class="text-muted"><i>“{{ testimonial.content }}”</i></p>
+                <h5 class="mt-2">{{ testimonial.name }}</h5>
+                <small class="text-muted">{{ testimonial.role }}</small>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- Newsletter Teaser -->
+<section class="py-5 newsletter-section mt-5">
+  <div class="container text-center">
+    <h2 class="mb-3"><i class="bi bi-envelope-paper"></i> Stay Updated</h2>
+    <p class="mb-4 text-muted">Subscribe to get updates on new books, features, and more.</p>
+    <form class="row justify-content-center g-2">
+      <div class="col-md-4 col-sm-8">
+        <input type="email" class="form-control rounded-pill px-4 py-2 shadow-sm" placeholder="Enter your email" required>
+      </div>
+      <div class="col-md-2 col-sm-4">
+        <button type="submit" class="btn w-100 rounded-pill px-4 py-2">Notify Me</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+
+{% endblock %}

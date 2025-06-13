@@ -1,0 +1,36 @@
+
+{% load static %}
+
+
+<footer class=" py-5 mt-5">
+  <div class="container">
+    <div class="row">
+
+      <!-- Site Info -->
+      <div class="col-md-5 mb-3">
+        <h5 class="fw-bold fs-3">LibreBooks</h5>
+        <p class="text-muted">Your personal digital library for free PDF books. Read. Learn. Grow.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-4 mb-3">
+        <h6 class="fw-bold fs-4">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="/" class=" text-decoration-none">Home</a></li>
+          <li><a href="/library" class=" text-decoration-none">Library</a></li>
+          <li><a href="/about" class=" text-decoration-none">About</a></li>
+          <li><a href="/contact" class=" text-decoration-none">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter or Contact -->
+      <div class="col-md-3 mb-2">
+        <img src="{% static 'images/footer-img.jpg' %}" alt="" height="200px">
+      </div>
+
+    </div>
+
+    <hr class="border-light">
+    <p class="text-center mb-0 text-muted">&copy; 2025 LibreBooks. All rights reserved.</p>
+  </div>
+</footer>

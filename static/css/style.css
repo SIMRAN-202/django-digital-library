@@ -1,0 +1,205 @@
+.nav-link-custom {
+  color: #4a4a4a;
+  position: relative;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Underline animation */
+.nav-link-custom::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #6b4f3b;
+  transition: width 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link-custom:hover::after {
+  width: 60%;
+}
+
+/* Background & color on hover */
+.nav-link-custom:hover {
+  color: #6b4f3b;
+  transform: translateY(-2px);
+}
+
+
+
+
+
+
+.hero-section {
+  background-image: url("../images/bg-books.webp");
+  background-size: contain;
+  background-position: center;
+  background-repeat: repeat-x;
+  position: relative;
+  height: 100vh;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55); 
+  z-index: 1;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Featured Books Section */
+section h2 {
+  font-size: 2.2rem;
+  text-align: center;
+  font-weight: 700;
+  color: #6b4f3b;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #7e4c29;
+}
+.wishlist-icon {
+  font-size: 1.2rem;
+  color: #dc3545;
+  transition: color 0.3s ease;
+  margin-left: 40px;
+}
+
+.wishlist-icon:hover {
+  color: #a71d2a;
+}
+
+/* Card Styling */
+.featured-card {
+  border-radius: 3rem;
+  border: none;
+}
+
+/* Card Image */
+.featured-card img {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  object-fit: cover;
+  height: 240px;
+}
+
+/* Card Title */
+.featured-card .card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #6b4f3b;
+  margin-bottom: 0.5rem;
+}
+
+/* Card Author */
+.featured-card .card-text:first-of-type {
+  font-size: 0.95rem;
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+}
+
+/* Description */
+.featured-card .card-text:last-of-type {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* Buttons */
+.featured-card .btn {
+  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #6b4f3b;
+  color: white;
+}
+
+.category-badge {
+  padding: 10px 20px;
+  border: 2px solid #6b4f3b;
+  border-radius: 25px;
+  background-color: #fff;
+  color: #6b4f3b;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.category-badge:hover {
+  background-color: #6b4f3b;
+  color: #fff;
+  text-decoration: none;
+}
+.feature-card {
+  background-color: #fff;
+  border: 1px solid #6b4f3b;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-section{
+  background-color: #825436;
+}
+.testimonial-section h2{
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+.testimonial-card {
+  transition: transform 0.3s ease;
+  border: 1px solid #6b4f3b;
+}
+.card-text {
+  font-style: italic;
+  color: #555;
+}
+
+.testimonial-card h5{
+  color: #6b4f3b;
+  font-size: 1.5rem;
+}
+
+.newsletter-section {
+  background-color: #fdfdfb;
+}
+
+.newsletter-section h2 {
+  color: #5e412f;
+  font-weight: 600;
+}
+
+.newsletter-section input::placeholder {
+  color: #aaa;
+}
+
+.newsletter-section input{
+  outline: none;
+  box-shadow: 0 0 0 0.15rem rgba(94, 65, 47, 0.25);
+  border-color: #6b4f3b;
+}
+.newsletter-section button{
+  background-color: #825436;
+  color: white;
+}
+footer{
+  border-top: 4px solid #5e412f;
+}
+footer li a{
+  color: #6b4f3b;
+  font-size: 1.2rem;
+}
+footer h5, footer h6{
+  color: #6b4f3b;
+}
+
+
