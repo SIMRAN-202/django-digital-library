@@ -12,3 +12,13 @@ def home(req):
         'categories':categories,
         'testimonials':testimonials
         })
+
+
+def about(req):
+    return render(req, 'about.html')
+
+def contact(req):
+    return render(req, 'contact.html')
+
+def library(req):
+    return render(req, 'library.html')
