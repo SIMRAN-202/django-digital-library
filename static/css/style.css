@@ -202,3 +202,22 @@ footer h5, footer h6{
   color: #6b4f3b;
 }
 
+@media (max-width: 768px) {
+  .col-md-4,
+  .col-md-8 {
+    flex: 100%;
+    max-width: 100%;
+  }
+
+  .col-md-4 {
+    margin-bottom: 1rem;
+  }
+}
+.library-card-btn a{
+  background-color: #6b4f3b;
+  color: white;
+}
+
+
+
+

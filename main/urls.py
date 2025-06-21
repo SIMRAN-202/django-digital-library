@@ -9,4 +9,5 @@ urlpatterns = [
     path('about/', views.about, name="about"),
     path('contact/', views.contact, name="contact"),
     path('library/', views.library, name="library"),
+    path('library/category/<int:category_id>/' , views.library_by_category, name="library_by_category")
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

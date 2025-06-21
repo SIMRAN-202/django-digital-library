@@ -21,4 +21,19 @@ def contact(req):
     return render(req, 'contact.html')
 
 def library(req):
-    return render(req, 'library.html')
+    books = Book.objects.all()
+    categories = Category.objects.all()
+    return render(req, 'library.html',{
+        'categories':categories,
+        'books':books
+    })
+
+def library_by_category(req, category_id):
+    categories = Category.objects.all()
+    selected_category = Category.objects.get(id=category_id)
+    books = Book.objects.filter(category=selected_category)
+    return render(req, 'library.html', {
+        'books': books,
+        'selected_category': selected_category,
+        'categories':categories
+    })
