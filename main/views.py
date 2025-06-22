@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from main.models import Book, Category, Testimonial
+from django.db.models import Q
 
 
 def home(req):
@@ -36,4 +37,14 @@ def library_by_category(req, category_id):
         'books': books,
         'selected_category': selected_category,
         'categories':categories
+    })
+
+def search_books(req):
+    query = req.GET.get('q')
+    books = []
+    if query:
+        books = Book.objects.filter(Q(title__icontains=query) | Q(author__icontains=query) | Q(description__icontains=query) )
+    return render(req, 'search_results.html',{
+        'books':books,
+        'query':query
     })
