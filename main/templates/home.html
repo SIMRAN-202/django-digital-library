@@ -30,7 +30,7 @@
             <p class="card-text">{{book.description|truncatewords:12}}</p>
              <div class="d-flex justify-content-between">
               <a href="{{ book.pdf_file.url }}" target="_blank" class="btn btn-md rounded-pill">Read PDF</a>
-              <a href="" class="btn rounded-pill btn-md">View Details</a>
+              <a href="{% url 'book_details' book.id %}" class="btn rounded-pill btn-md">View Details</a>
             </div>
           </div>
         </div>

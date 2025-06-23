@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load widget_tweaks %}
+<section class="py-5" style="background-color: #f9f8f4;">
+  <div class="container d-flex justify-content-center">
+    <div style="max-width: 450px; width: 100%;">
+      <h3 class="text-center mb-4" style="color: #5e412f;">Create Your Account</h3>
+
+      <form method="post" class="d-grid gap-3">
+        {% csrf_token %}
+        {% for field in form %}
+          <div>
+            <label class="form-label fw-semibold" style="color: #6b4f3b;">{{ field.label }}</label>
+            {{ field|add_class:"form-control rounded-pill px-4 py-2 border-1" }}
+            {% if field.errors %}
+              <div class="text-danger small mt-1">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="btn rounded-pill text-white px-4 py-2" style="background-color: #6b4f3b;">Register</button>
+      </form>
+
+      <p class="text-center mt-4">
+        Already have an account?
+        <a href="{% url 'login' %}" class="text-decoration-none" style="color: #e6a87c;">Login here</a>
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

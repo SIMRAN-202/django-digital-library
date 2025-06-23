@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +14,22 @@
 <body>
     {% include 'navbar.html' %}
 
+    
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show position-fixed top-0 end-0 m-3" role="alert" style="z-index: 1055; min-width: 250px; background-color:#f3bc94">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+
     {% block content %}
 
     {% endblock %}
 
+    
     
     {% include 'footer.html' %}
 

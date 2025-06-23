@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      
+    {% if book %}
+      <div class="col-md-5 text-center">
+        <img src="{{book.cover_image.url}}" class="img-fluid rounded shadow" alt="Book Cover">
+      </div>
+      
+      <div class="col-md-7">
+        <h2 class="mb-3" style="color: #5e412f;">{{book.title}}</h2>
+        <p class="text-muted mb-1"><strong>Author:</strong> {{book.author}}</p>
+        <p class="text-muted mb-3"><strong>Category:</strong> {{book.category}}</p>
+
+        <div class="mb-4 text-muted">
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="bi bi-file-earmark-text me-2 text-secondary"></i><strong>Pages:</strong> 340</li>
+                <li class="mb-2"><i class="bi bi-calendar-event me-2 text-secondary"></i><strong>Published:</strong> 2021</li>
+                <li class="mb-2"><i class="bi bi-upc-scan me-2 text-secondary"></i><strong>ISBN:</strong> 978-1-23456-789-0</li>
+                <li class="mb-2"><i class="bi bi-file-earmark-pdf me-2 text-secondary"></i><strong>File Size:</strong> 1.8 MB</li>
+                <li class="mb-2"><i class="bi bi-filetype-pdf me-2 text-secondary"></i><strong>Format:</strong> PDF</li>
+                <li class="mb-2"><i class="bi bi-download me-2 text-secondary"></i><strong>Downloads:</strong> 1,254</li>
+            </ul>
+        </div>
+
+        <p class="mb-4" style="line-height: 1.6;">
+          {{book.description}}
+        </p>
+
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{{book.pdf_file.url}}" class="btn rounded-pill px-4" target="_blank" style="color:white; background-color:#6b4f3b">Read PDF</a>
+          <button class="btn  rounded-pill px-4" style="color:white; background-color:#e6a87c">Add to Wishlist</button>
+
+    {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="my-5">
+
+<section class="py-4">
+  <div class="container">
+    <h4 class="mb-4 fs-2" style="color:#6b4f3b">Related Books</h4>
+    <div class="row g-4">
+    {% if related_books %}
+      {% for rbook in related_books %}
+      <div class="col-md-3">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ rbook.cover_image.url }}" class="card-img-top" style="height: 180px; object-fit: cover;" alt="{{ rbook.title }}">
+          <div class="card-body">
+            <h6 class="card-title text-truncate" title="{{ rbook.title }}">{{ rbook.title }}</h6>
+            <p class="text-muted small mb-2">{{ rbook.author }}</p>
+            <a href="{% url 'book_details' rbook.id %}" class="btn btn-sm rounded-pill" style="color:white; background-color:#6b4f3b">View Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

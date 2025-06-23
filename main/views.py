@@ -48,3 +48,11 @@ def search_books(req):
         'books':books,
         'query':query
     })
+
+def book_details(req, book_id):
+    book = Book.objects.get(id=book_id)
+    related_books = Book.objects.filter(category=book.category).exclude(id=book_id)[:4]
+    return render(req, 'book_details.html',{
+        'book':book,
+        'related_books':related_books
+    })
