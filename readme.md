@@ -48,11 +48,15 @@
 
 | Home Page | Library Page | Login Page |
 |-----------|--------------|------------|
-| ![Home](screenshots/home.png) | ![Library](screenshots/library.png) | ![Login](screenshots/login.png) |
+| ![Home](screenshots/home.png) | ![Library](screenshots/library.png) | ![Login](screenshots/login.png) | 
 
-| Dashboard | Edit Profile | Wishlist |
-|-----------|--------------|----------|
-| ![Dashboard](screenshots/dashboard.png) | ![Edit Profile](screenshots/edit_profile.png) | ![Wishlist](screenshots/wishlist.png) |
+| Book Detail Page | Wishlist |
+|------------------|----------|
+|![Book Detail](screenshots/book_detail.png) | ![Wishlist](screenshots/wishlist.png) |
+
+| Dashboard | Edit Profile | 
+|-----------|--------------|
+| ![Dashboard](screenshots/dashboard.png) | ![Edit Profile](screenshots/edit_profile.png) | 
 
 
 ## Contact
