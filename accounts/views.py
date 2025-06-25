@@ -1,9 +1,12 @@
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
+from .models import Wishlist
+from main.models import Book, Category
+
 
 
 def user_login(req):
@@ -53,8 +56,11 @@ def user_logout(req):
 @login_required
 def dashboard(req):
     profile = req.user.profile
+    user = req.user
+    wishlist_count = Wishlist.objects.filter(user=user).count()
     return render(req, 'dashboard.html', {
-        'profile': profile
+        'profile': profile,
+        'wishlist_count': wishlist_count
     })
 
 
@@ -100,3 +106,34 @@ def edit_profile(request):
         form = ProfileUpdateForm(instance=profile, initial=initial_data)
 
     return render(request, 'edit_profile.html', {'form': form})
+
+
+@login_required
+def add_to_wishlist(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    wishlist_item = Wishlist.objects.filter(user=request.user, book=book).first()
+
+    if wishlist_item:
+        wishlist_item.delete()
+        messages.success(request, "Book removed from your wishlist.")
+    else:
+        Wishlist.objects.create(user=request.user, book=book)
+        messages.success(request, "Book added to your wishlist.")
+
+    return redirect(request.META.get('HTTP_REFERER', 'library'))
+
+
+@login_required
+def wishlist_view(request):
+    selected_category = request.GET.get('category')
+    wishlist_qs = Wishlist.objects.filter(user=request.user)
+
+    if selected_category and selected_category != 'all':
+        wishlist_qs = wishlist_qs.filter(book__category__name=selected_category)
+
+    categories = Category.objects.all()
+    return render(request, 'wishlist.html', {
+        'wishlist_books': wishlist_qs,
+        'categories': categories,
+        'selected_category': selected_category,
+    })

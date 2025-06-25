@@ -8,4 +8,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
+    path('wishlist/add/<int:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    path('wishlist/', views.wishlist_view, name="wishlist")
 ]

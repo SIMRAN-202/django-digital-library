@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="py-5 position-relative" style="background-color: #6b4f3b;">
+  <div class="container text-center text-white">
+    <h1 class="display-5 fw-bold fs-1">Your Personal Book Haven</h1>
+    <p class="lead mb-3 fs-6">All the books you've loved — just a click away. Add, remove, or start reading from your wishlist anytime!</p>
+  </div>
+</section>
+
+<!-- Wishlist Books Section -->
+<section class="py-5">
+  <div class="container">
+
+  <!-- Filter Section -->
+  <div class="d-flex justify-content-end mb-4">
+    <form method="get" class="d-flex align-items-center">
+      <label for="category" class="me-2 fw-semibold" style="color:#6b4f3b;">Filter by Category:</label>
+      <select name="category" id="category" class="form-select w-auto rounded-pill"
+              onchange="this.form.submit()" style="border: 2px solid #6b4f3b; color:#6b4f3b;">
+        <option value="all" {% if selected_category == 'all' or not selected_category %}selected{% endif %}>All</option>
+        {% for category in categories %}
+          <option value="{{ category.name }}" {% if category.name == selected_category %}selected{% endif %}>
+            {{ category.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+
+  {% if wishlist_books %}
+    <div class="row g-4">
+      {% for item in wishlist_books %}
+        <!-- Card rendering as usual -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="{{ item.book.cover_image.url }}" class="card-img-top" alt="{{ item.book.title }}"
+                 style="height: 220px; object-fit: cover;">
+
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <h6 class="card-title mb-0 text-truncate" style="color: #3c2f2f; max-width: 85%;">
+                    {{ item.book.title }}
+                  </h6>
+                  <a href="{% url 'add_to_wishlist' item.book.id %}" title="Remove from Wishlist">
+                    <i class="bi bi-heart-fill text-danger fs-5" style="cursor: pointer;"></i>
+                  </a>
+                </div>
+                <p class="fst-italic text-muted small mb-1">{{ item.book.author }}</p>
+                <p class="text-muted small fst-italic mb-3">{{ item.book.description|truncatewords:12 }}</p>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <a href="{{ item.book.pdf_file.url }}" target="_blank" class="btn btn-md rounded-pill"
+                   style="background-color:#6b4f3b; color:white;">Read PDF</a>
+                <a href="{% url 'book_details' item.book.id %}" class="btn btn-md rounded-pill"
+                   style="background-color:#6b4f3b; color:white;">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <!-- No Books Found Message -->
+    <div class="text-center my-5">
+      <i class="bi bi-emoji-frown" style="font-size: 5rem; color:#6b4f3b;"></i>
+      {% if selected_category and selected_category != 'all' %}
+        <h5 class="mt-3" style="color:#6b4f3b;">No books found in "{{ selected_category }}" category.</h5>
+      {% else %}
+        <h5 class="mt-3" style="color:#6b4f3b;">Your wishlist is empty.</h5>
+      {% endif %}
+      <p style="color:#6b4f3b;">Start exploring and add books you love!</p>
+      <a href="{% url 'library' %}" class="btn rounded-pill mt-2 px-4 py-2" style="color:white; background-color:#6b4f3b;">
+        <i class="bi bi-book-half me-1"></i> Browse Library
+      </a>
+    </div>
+  {% endif %}
+
+</div>
+
+</section>
+
+{% endblock %}

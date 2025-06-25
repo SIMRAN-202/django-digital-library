@@ -33,7 +33,22 @@
 
         <div class="d-flex flex-wrap gap-3">
           <a href="{{book.pdf_file.url}}" class="btn rounded-pill px-4" target="_blank" style="color:white; background-color:#6b4f3b">Read PDF</a>
-          <button class="btn  rounded-pill px-4" style="color:white; background-color:#e6a87c">Add to Wishlist</button>
+            {% if user.is_authenticated %}
+              {% if in_wishlist %}
+                <a href="{% url 'add_to_wishlist' book.id %}" class="btn rounded-pill px-4" style="color:white; background-color:#dc3545;">
+                  <i class="bi bi-heart-fill me-1"></i> Remove from Wishlist
+                </a>
+              {% else %}
+                <a href="{% url 'add_to_wishlist' book.id %}" class="btn rounded-pill px-4" style="color:white; background-color:#e6a87c;">
+                  <i class="bi bi-heart me-1"></i> Add to Wishlist
+                </a>
+              {% endif %}
+            {% else %}
+              <a href="{% url 'login' %}?next={% url 'book_details' book.id %}" class="btn rounded-pill px-4" style="color:white; background-color:#e6a87c;">
+                <i class="bi bi-heart me-1"></i> Login to Wishlist
+              </a>
+            {% endif %}
+
 
     {% endif %}
         </div>

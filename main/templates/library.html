@@ -27,22 +27,50 @@
         {% if books %}
         {% for book in books %}
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="{{ book.cover_image.url }}" class="card-img-top" alt="{{ book.title }}" style="height: 200px; object-fit: cover;">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-start mb-2">
-                <h6 class="card-title mb-0 text-truncate" style="max-width: 85%; font-size: 1rem; color: #3c2f2f;">{{ book.title }}</h6>
-                <i class="bi bi-heart wishlist-icon text-danger" style="cursor: pointer;" title="Add to Wishlist"></i>
-              </div>
-              <p class="card-text mb-1" style="font-size: 0.9rem; color: #555;">{{ book.author }}</p>
-              <p class="card-text small text-muted">{{ book.description|truncatewords:12 }}</p>
-              <div class="d-flex justify-content-between library-card-btn">
-                <a href="{{ book.pdf_file.url }}" target="_blank" class="btn btn-sm  rounded-pill">Read PDF</a>
-                <a href="{% url 'book_details' book.id %}" class="btn btn-sm  rounded-pill">View Details</a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="card h-100 shadow-sm border-0">
+    <!-- Book Cover -->
+    <img src="{{ book.cover_image.url }}" class="card-img-top" alt="{{ book.title }}"
+         style="height: 200px; object-fit: cover;">
+
+    <div class="card-body">
+      <!-- Title & Wishlist Icon -->
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <h6 class="card-title mb-0 text-truncate" 
+            style="max-width: 85%; font-size: 1rem; color: #3c2f2f; text-decoration: none;">
+          {{ book.title }}
+        </h6>
+        <a href="{% if user.is_authenticated %}
+                    {% url 'add_to_wishlist' book.id %}
+                 {% else %}
+                    {% url 'login' %}
+                 {% endif %}" class="text-decoration-none">
+          {% if book.id in wishlist_book_ids %}
+            <i class="bi bi-heart-fill wishlist-icon text-danger" 
+               data-book-id="{{ book.id }}" 
+               style="cursor: pointer;" 
+               title="Remove from Wishlist"></i>
+          {% else %}
+            <i class="bi bi-heart wishlist-icon text-muted" 
+               data-book-id="{{ book.id }}" 
+               style="cursor: pointer;" 
+               title="Add to Wishlist"></i>
+          {% endif %}
+        </a>
+      </div>
+
+      <!-- Author & Description -->
+      <p class="card-text mb-1 fst-italic" style="font-size: 0.9rem; color: #555;">{{ book.author }}</p>
+      <p class="card-text small text-muted fst-italic">{{ book.description|truncatewords:12 }}</p>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between library-card-btn mt-3">
+        <a href="{{ book.pdf_file.url }}" target="_blank" class="btn btn-sm rounded-pill">Read PDF</a>
+        <a href="{% url 'book_details' book.id %}" class="btn btn-sm rounded-pill">View Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+
         {% endfor %}
         {% else %}
         <p class="text-center fs-3" style="color: #6b4f3b;">No books to show!</p>

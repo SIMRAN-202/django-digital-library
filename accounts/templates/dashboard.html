@@ -53,7 +53,7 @@
             <div class="text-center ms-md-5">
               <i class="bi bi-heart-fill text-muted"></i><br>
               <small class="text-muted">Wishlist</small><br>
-              {{ wishlist.count }}
+              {{ wishlist_count }}
             </div>
           </div>
 
@@ -61,7 +61,7 @@
             <a href="{% url 'edit_profile' %}" class="btn rounded-pill px-4 text-white" style="background-color: #6b4f3b;">
               <i class="bi bi-pencil-square me-1"></i> Edit Profile
             </a>
-            <a href="" class="btn rounded-pill px-4 text-white" style="background-color: #e6a87c;">
+            <a href="{% url 'wishlist' %}" class="btn rounded-pill px-4 text-white" style="background-color: #e6a87c;">
               <i class="bi bi-heart-fill me-1"></i> Go to Wishlist
             </a>
           </div>
